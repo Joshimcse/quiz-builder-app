@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[type="radio"].input-checkbox {
+  border-radius: 0;
+}
+
+[type="radio"].input-checkbox:checked {
+  background-image: url("/src/checkmark.png");
+  color: transparent;
+  border: 1px solid #000;
+}
+
+[type="radio"].input-checkbox:focus {
+  outline: none;
+  color: transparent;
+  border: 1px solid #000;
+  outline-offset: 0;
+  outline-width: 0;
+  outline-color: transparent;
+}
+
+.carousel-root {
+  height: 100%;
+}
+.carousel-root .carousel-slider {
+  height: 100%;
+}
+
+.slider-wrapper {
+  height: 100%;
+}
+
+.slider {
+  height: 100%;
+}
+
+.control-arrow {
+  background: green !important;
+  width: 100px;
+}
+
+.control-prev {
+  bottom: 0px !important;
+  top: auto !important;
+}
+
+.control-next {
+  bottom: 0px !important;
+  top: auto !important;
+}
+
+.carousel-status {
+  font-size: 20px !important;
+  text-shadow: none !important;
+  color: grey !important;
+  padding-right: 20px !important;
+}
