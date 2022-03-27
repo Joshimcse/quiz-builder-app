@@ -10,28 +10,22 @@ import { addNewQuiz, formatQuestionsForStore } from '../utils';
 
 const AddQuiz = () => {
   const history = useNavigate();
+  
   const [loader, setLoader] = useState(false);
+
   const [quizInfo, setQuizInfo] = useState({
-    title: 'quiz-title-1',
+    title: '',
     pointPerQuetion: '1',
-    isShowQuestionPerPage: true,
+    isShowQuestionPerPage: false,
   });
 
   const [questions, setQuestions] = useState([
     {
       id: uuidv4(),
-      title: 'Initial Question 1',
+      title: '',
       optionsWithAnswer: [
-        { value: 'option-1-1', isCorrect: true },
-        { value: 'option-1-2', isCorrect: false },
-      ],
-    },
-    {
-      id: uuidv4(),
-      title: 'Initial Question 2',
-      optionsWithAnswer: [
-        { value: 'option-2-1', isCorrect: false },
-        { value: 'option-2-2', isCorrect: true },
+        { value: '', isCorrect: false },
+        { value: '', isCorrect: false },
       ],
     },
   ]);
