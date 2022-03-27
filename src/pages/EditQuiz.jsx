@@ -4,11 +4,13 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import Questions from '../components/edit/Questions';
+
 import {
   editQuiz,
   formatQuestionsForState,
   formatQuestionsForStore,
   getQuiz,
+  isValidQuiz,
 } from '../utils';
 
 const EditQuiz = () => {
@@ -43,6 +45,17 @@ const EditQuiz = () => {
       progress: undefined,
     });
 
+  const validationErrorToast = () =>
+    toast.error('Validation Error! Please Fill-up all the necessary field', {
+      position: 'top-center',
+      autoClose: 800,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   const quizInfoInputHandler = e => {
     const { name, value } = e.target;
     setQuizInfo({
@@ -59,17 +72,28 @@ const EditQuiz = () => {
   };
 
   const updateQuizHandler = () => {
-    const isEditQuizSuccess = editQuiz({
+    setLoader(true);
+    const _quiz = {
       ...quizInfo,
       questions: formatQuestionsForStore(questions),
-    });
+    };
 
-    if (isEditQuizSuccess) {
-      setLoader(false);
-      history('/?edit_quiz=true');
+    if (isValidQuiz(_quiz)) {
+      const isEditQuizSuccess = editQuiz({
+        ...quizInfo,
+        questions: formatQuestionsForStore(questions),
+      });
+
+      if (isEditQuizSuccess) {
+        setLoader(false);
+        history('/?edit_quiz=true');
+      } else {
+        setLoader(false);
+        editQuizFailToast();
+      }
     } else {
+      validationErrorToast();
       setLoader(false);
-      editQuizFailToast();
     }
   };
 

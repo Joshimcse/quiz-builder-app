@@ -15,7 +15,6 @@ const ViewQuiz = () => {
   const [isShowPageNotFound, setIsShowPageNotFound] = useState(false);
 
   useEffect(() => {
-    // const _quiz = getQuiz("588a37a6-cc84-4e0b-b3e1-0d321fdc015b");
     const _quiz = getQuiz(quizId);
 
     if (_quiz) {

@@ -36,7 +36,7 @@ const Success = ({
           You have successfully completed
         </h2>
         <p className="text-18 mb-2">
-          {quizResult?.numberOfCorrectAnswers} of {submitedAnswers.length}
+          You are submit {quizResult?.numberOfCorrectAnswers} correct answers of {submitedAnswers.length}
         </p>
         <p className="text-18 font-bold">
           You earned +{quizResult?.earnPoints} points

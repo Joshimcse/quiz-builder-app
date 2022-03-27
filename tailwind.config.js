@@ -5,8 +5,10 @@ module.exports = {
       width: {
         900: '900px',
       },
+      height: {
+        200: '200px',
+      },
     },
-
     fontSize: {
       8: '8px',
       10: '10px',

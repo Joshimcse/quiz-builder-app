@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import Questions from '../components/edit/Questions';
-import { addNewQuiz, formatQuestionsForStore } from '../utils';
+
+import { addNewQuiz, formatQuestionsForStore, isValidQuiz } from '../utils';
 
 const AddQuiz = () => {
   const history = useNavigate();
@@ -41,6 +42,17 @@ const AddQuiz = () => {
       progress: undefined,
     });
 
+  const validationErrorToast = () =>
+    toast.error('Validation Error! Please Fill-up all the necessary field', {
+      position: 'top-center',
+      autoClose: 800,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   const quizInfoInputHandler = e => {
     const { name, value } = e.target;
     setQuizInfo({
@@ -58,17 +70,27 @@ const AddQuiz = () => {
 
   const saveQuizHandler = () => {
     setLoader(true);
-    const isAddNewQuizSuccess = addNewQuiz({
+    const _quiz = {
       ...quizInfo,
       questions: formatQuestionsForStore(questions),
-    });
+    };
 
-    if (isAddNewQuizSuccess) {
-      setLoader(false);
-      history('/?add_new_quiz=true');
+    if (isValidQuiz(_quiz)) {
+      const isAddNewQuizSuccess = addNewQuiz({
+        ...quizInfo,
+        questions: formatQuestionsForStore(questions),
+      });
+
+      if (isAddNewQuizSuccess) {
+        setLoader(false);
+        history('/?add_new_quiz=true');
+      } else {
+        setLoader(false);
+        addNewQuizFailToast();
+      }
     } else {
+      validationErrorToast();
       setLoader(false);
-      addNewQuizFailToast();
     }
   };
 

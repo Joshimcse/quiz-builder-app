@@ -3,6 +3,8 @@ import cn from 'classnames';
 import Option from './Option';
 import SubmitButton from './SubmitButton';
 
+import { isImage } from '../../utils';
+
 const QuestionComponent = ({
   index,
   question,
@@ -21,9 +23,22 @@ const QuestionComponent = ({
         }
       )}
     >
-      <h2 className="text-16 font-bold mb-2 text-left">
-        {`Q.${index} : ${question?.title}`}
-      </h2>
+      {isImage(question?.title) ? (
+        <>
+          <h2 className="text-16 font-bold mb-2 text-left">{`Q.${index}`}</h2>
+          <div>
+            <img
+              src={question?.title}
+              alt="question?.title"
+              className="mb-1.5 h-200 w-auto-img"
+            />
+          </div>
+        </>
+      ) : (
+        <h2 className="text-16 font-bold mb-2 text-left">
+          {`Q.${index} : ${question?.title}`}{' '}
+        </h2>
+      )}
 
       {question?.options.map((option, _index) => (
         <Option

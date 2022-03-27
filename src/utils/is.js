@@ -40,10 +40,11 @@ export const isValidQuestion = question => {
     isObject(question) &&
     !isEmpty(question?.title) &&
     isArray(question?.options) &&
-    isArray(question?.answers) &&
-    question?.options.length >= 2 &&
-    question?.answers.length >= 1 &&
-    question?.options.length >= question?.answers.length
+    isArray(question?.correctAnswers) &&
+    question?.options?.length >= 2 &&
+    question?.correctAnswers?.length >= 1 &&
+    question?.options?.every(option => !isEmpty(option)) &&
+    question?.options?.length >= question?.correctAnswers?.length
   );
 };
 
@@ -51,7 +52,6 @@ export const isValidQuiz = quiz => {
   return (
     !!quiz &&
     isObject(quiz) &&
-    !isEmpty(quiz?.id) &&
     !isEmpty(quiz?.title) &&
     isArray(quiz?.questions) &&
     !isEmpty(quiz?.questions) &&

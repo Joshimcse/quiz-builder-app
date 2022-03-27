@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import QuizCard from '../components/dashboard/QuizCard';
+
 import { deleteQuiz, getQuizzes, isArray } from '../utils';
 
 const Dashboard = () => {
