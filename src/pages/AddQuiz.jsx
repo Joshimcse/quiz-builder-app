@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
+import { ImSpinner } from 'react-icons/Im';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import Questions from '../components/edit/Questions';
 import { addNewQuiz, formatQuestionsForStore } from '../utils';
 
 const AddQuiz = () => {
+  const history = useNavigate();
+  const [loader, setLoader] = useState(false);
   const [quizInfo, setQuizInfo] = useState({
     title: 'quiz-title-1',
     pointPerQuetion: '1',
@@ -31,6 +36,17 @@ const AddQuiz = () => {
     },
   ]);
 
+  const addNewQuizFailToast = () =>
+    toast.error('Failed! Please Check Again. Quiz Title Must Be Unique', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   const quizInfoInputHandler = e => {
     const { name, value } = e.target;
     setQuizInfo({
@@ -47,12 +63,19 @@ const AddQuiz = () => {
   };
 
   const saveQuizHandler = () => {
+    setLoader(true);
+    const isAddNewQuizSuccess = addNewQuiz({
+      ...quizInfo,
+      questions: formatQuestionsForStore(questions),
+    });
 
-      addNewQuiz({
-        ...quizInfo,
-        questions: formatQuestionsForStore(questions),
-      })
-  
+    if (isAddNewQuizSuccess) {
+      setLoader(false);
+      history('/?add_new_quiz=true');
+    } else {
+      setLoader(false);
+      addNewQuizFailToast();
+    }
   };
 
   return (
@@ -104,7 +127,12 @@ const AddQuiz = () => {
             className=" bg-green-600 py-3 w-full flex flex-row items-center justify-center rounded text-white uppercase font-bold"
             onClick={saveQuizHandler}
           >
-            <AiOutlinePlusCircle className="mr-1" /> Save Quiz
+            {loader ? (
+              <ImSpinner className="mr-1.5 spinner" />
+            ) : (
+              <AiOutlinePlusCircle className="mr-1" />
+            )}{' '}
+            Save Quiz
           </button>
         </div>
       </div>

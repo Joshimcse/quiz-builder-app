@@ -34,7 +34,6 @@ export const isEmpty = v => {
     : false);
 };
 
-
 export const isValidQuestion = question => {
   return (
     !!question &&

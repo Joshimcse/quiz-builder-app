@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import Question from '../view/Question';
 import SubmitButton from '../view/SubmitButton';
 

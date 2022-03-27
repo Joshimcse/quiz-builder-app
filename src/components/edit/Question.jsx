@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { AiOutlinePlusCircle, AiOutlineDelete } from 'react-icons/ai';
-import { ItemTypes } from '../../constants';
 
 import Options from './Options';
+import { ItemTypes } from '../../constants';
 
 const Question = ({
   id,

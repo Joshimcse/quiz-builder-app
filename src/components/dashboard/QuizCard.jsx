@@ -1,13 +1,13 @@
 import React from 'react';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 
-const Dashboard = ({ index, id, title, quizDeleteHandler }) => {
+const QuizCard = ({ index, id, title, quizDeleteHandler }) => {
   return (
     <div className="bg-slate-50 mx-auto shadow-md p-3 rounded mb-3 flex items-center relative">
       <Link
         to={`/view/${id}`}
-        className="text-16 font-bold cursor-pointer mr-4 pr-10"
+        className="text-16 font-bold cursor-pointer mr-4 pr-10 w-full"
       >
         {`Q.${index + 1} : ${title}`}
       </Link>
@@ -30,4 +30,4 @@ const Dashboard = ({ index, id, title, quizDeleteHandler }) => {
   );
 };
 
-export default Dashboard;
+export default QuizCard;

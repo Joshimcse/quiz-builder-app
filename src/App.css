@@ -2,17 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-[type="radio"].input-checkbox {
+[type='radio'].input-checkbox {
   border-radius: 0;
 }
 
-[type="radio"].input-checkbox:checked {
-  background-image: url("/src/checkmark.png");
+[type='radio'].input-checkbox:checked {
+  background-image: url('/src/checkmark.png');
   color: transparent;
   border: 1px solid #000;
 }
 
-[type="radio"].input-checkbox:focus {
+[type='radio'].input-checkbox:focus {
   outline: none;
   color: transparent;
   border: 1px solid #000;
@@ -56,4 +56,39 @@
   text-shadow: none !important;
   color: grey !important;
   padding-right: 20px !important;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.spinner {
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Exo 2', sans-serif !important;
 }

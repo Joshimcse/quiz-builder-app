@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SubmitButton = ({ className, setIsSubmitQuiz }) => {
   return (
     <button

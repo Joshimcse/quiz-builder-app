@@ -7,6 +7,8 @@ import EditQuiz from './pages/EditQuiz';
 import ViewQuiz from './pages/ViewQuiz';
 
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/edit/:quizId" element={<EditQuiz />} />
         <Route path="/view/:quizId" element={<ViewQuiz />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

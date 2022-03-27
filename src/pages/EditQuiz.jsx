@@ -1,6 +1,7 @@
+import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Questions from '../components/edit/Questions';
 import {
@@ -11,9 +12,10 @@ import {
 } from '../utils';
 
 const EditQuiz = () => {
+  const history = useNavigate();
   const { quizId } = useParams();
+  const [loader, setLoader] = useState(false);
   const [quizInfo, setQuizInfo] = useState(null);
-
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -29,6 +31,17 @@ const EditQuiz = () => {
       setQuestions(formatQuestionsForState(quiz?.questions));
     }
   }, []);
+
+  const editQuizFailToast = () =>
+    toast.error('Failed! Something is Wrong! Please Try Again', {
+      position: 'top-center',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
 
   const quizInfoInputHandler = e => {
     const { name, value } = e.target;
@@ -46,10 +59,18 @@ const EditQuiz = () => {
   };
 
   const updateQuizHandler = () => {
-    editQuiz({
+    const isEditQuizSuccess = editQuiz({
       ...quizInfo,
       questions: formatQuestionsForStore(questions),
     });
+
+    if (isEditQuizSuccess) {
+      setLoader(false);
+      history('/?edit_quiz=true');
+    } else {
+      setLoader(false);
+      editQuizFailToast();
+    }
   };
 
   return quizInfo ? (
@@ -101,7 +122,12 @@ const EditQuiz = () => {
             className=" bg-green-600 py-3 w-full flex flex-row items-center justify-center rounded text-white uppercase font-bold"
             onClick={updateQuizHandler}
           >
-            <AiOutlinePlusCircle className="mr-1" /> Update Quiz
+            {loader ? (
+              <ImSpinner className="mr-1.5 spinner" />
+            ) : (
+              <AiOutlinePlusCircle className="mr-1" />
+            )}{' '}
+            Update Quiz
           </button>
         </div>
       </div>

@@ -9,7 +9,7 @@ const QuestionComponent = ({
   singleView,
   submittedAnswersHandler,
   submit,
-  setIsSubmitQuiz
+  setIsSubmitQuiz,
 }) => {
   return (
     <div
@@ -36,7 +36,12 @@ const QuestionComponent = ({
         />
       ))}
 
-      {singleView && submit && <SubmitButton className="mt-auto mb-16" setIsSubmitQuiz={() => setIsSubmitQuiz(true)}/>}
+      {singleView && submit && (
+        <SubmitButton
+          className="mt-auto mb-16"
+          setIsSubmitQuiz={() => setIsSubmitQuiz(true)}
+        />
+      )}
     </div>
   );
 };
