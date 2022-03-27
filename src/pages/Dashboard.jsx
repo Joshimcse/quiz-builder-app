@@ -4,15 +4,32 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 import QuizCard from '../components/dashboard/QuizCard';
 
-import { deleteQuiz, getQuizzes, isArray } from '../utils';
+import {
+  deleteQuiz,
+  getQuizzes,
+  isArray,
+  isVisitForFirstTime,
+  setQuizzesInLocalStorage,
+} from '../utils';
+import { dummyQuizzes } from '../utils/dummy-quiz';
 
 const Dashboard = () => {
   const [quizzes, setQuizzes] = useState(null);
   let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const _quizzes = getQuizzes();
-    if (_quizzes) setQuizzes(_quizzes);
+    if (isVisitForFirstTime()) {
+      // we set dummy quizzes on local storage only for first time users
+      setQuizzes(dummyQuizzes);
+      setQuizzesInLocalStorage(dummyQuizzes);
+      showToastHandler(
+        'We set some dummy quizzes on storage for only first time visited users to test perpose',
+        15000
+      );
+    } else {
+      const _quizzes = getQuizzes();
+      if (_quizzes) setQuizzes(_quizzes);
+    }
   }, []);
 
   useEffect(() => {

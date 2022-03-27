@@ -1,14 +1,14 @@
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Pages
-import Dashboard from './pages/Dashboard';
 import AddQuiz from './pages/AddQuiz';
 import EditQuiz from './pages/EditQuiz';
 import ViewQuiz from './pages/ViewQuiz';
+import Dashboard from './pages/Dashboard';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (

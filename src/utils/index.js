@@ -11,6 +11,7 @@ export {
   isValidQuiz,
   isQuizAllreadyExists,
   isCorrectAnswer,
+  isVisitForFirstTime
 } from './is.js';
 
 export {

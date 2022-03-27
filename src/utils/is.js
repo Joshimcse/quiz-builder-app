@@ -79,3 +79,11 @@ export const isCorrectAnswer = (correctAnwer, submitedAnswer) => {
     );
   }
 };
+
+export const isVisitForFirstTime = () => {
+  if (localStorage.getItem('allready_visited') !== 'true') {
+    localStorage.setItem('allready_visited', 'true');
+    return true;
+  }
+  return false;
+};
