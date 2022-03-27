@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
-import { ImSpinner } from 'react-icons/Im';
+import { ImSpinner } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
@@ -10,7 +10,7 @@ import { addNewQuiz, formatQuestionsForStore } from '../utils';
 
 const AddQuiz = () => {
   const history = useNavigate();
-  
+
   const [loader, setLoader] = useState(false);
 
   const [quizInfo, setQuizInfo] = useState({
